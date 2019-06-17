@@ -2,8 +2,10 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
-      <module name="sample-excel-reader.main" target="1.8" />
-      <module name="sample-excel-reader.test" target="1.8" />
+      <module name="node-action-resolver.main" target="1.8" />
+      <module name="node-action-resolver.test" target="1.8" />
+      <module name="node-catalog-automation.main" target="1.8" />
+      <module name="node-catalog-automation.test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

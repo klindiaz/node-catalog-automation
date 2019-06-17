@@ -3,7 +3,7 @@ package util
 import com.xlson.groovycsv.CsvParser
 
 class LocationUtil {
-    private static final String LOCATIONS_FILE = "../sample-excel-reader/src/main/resources/LocationReferences.csv"
+    private static final String LOCATIONS_FILE = "../node-action-resolver/src/main/resources/LocationReferences.csv"
     private static Map<String,String> locationVariations = [:]
     private static Map<String,LocationInfo> locations = [:]
     private static Map<String,String> marketConversion = [:]
