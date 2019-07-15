@@ -2,41 +2,43 @@ package util
 
 import domain.ACTION
 
+import static domain.ACTION.NEEDS_REVIEW
+
 class ActionUtil {
-    private static final String N_PLUS_ZERO_MIDSPLIT =  "N+0 Midsplit";
-    private static final String N_PLUS_ZERO =  "N+0";
-    private static final String DIGITAL_NODE_SPLIT_MIDSPLIT =  "Digital Nodesplit Midsplit";
-    private static final String DIGITAL_MIDSPLIT =  "Digital Midsplit";
-    private static final String DIGITAL_NODE_SPLIT =  "Digital Nodesplit";
-    private static final String MIDSPLIT_NODE_SPLIT =  "Midsplit NS";
-    private static final String MIDSPLIT =  "Midsplit";
-    private static final String NODE_SPLIT =  "NS";
-    private static final String NEEDS_REVIEW =  "NEEDS REVIEW!!!";
 
     static String getActionDescription(List<ACTION> actions) {
-        boolean isNPlusZero = actions.contains(ACTION.N_PLUS_ZERO)
-        boolean isDigital = actions.contains(ACTION.DIGITAL)
-        boolean isMidSplit = actions.contains(ACTION.MID_SPLIT)
-        boolean isNodeSplit = actions.contains(ACTION.NODE_SPLIT)
+        DescriptionBuilder builder = new DescriptionBuilder()
+        Set<ACTION> uniqueActions = new HashSet<>(actions)
 
-        if (isNPlusZero && isMidSplit) {
-            return N_PLUS_ZERO_MIDSPLIT
-        } else if (isNPlusZero && !isMidSplit) {
-            return N_PLUS_ZERO
-        } else if (isDigital && isNodeSplit && isMidSplit &&!isNPlusZero) {
-            return DIGITAL_NODE_SPLIT_MIDSPLIT
-        } else if (isDigital && isMidSplit && !isNPlusZero && !isNodeSplit) {
-            return DIGITAL_MIDSPLIT
-        } else if (isDigital && isNodeSplit && !isMidSplit && !isNPlusZero) {
-            return DIGITAL_NODE_SPLIT
-        } else if (isNodeSplit && !isNPlusZero && !isDigital && !isMidSplit) {
-            return NODE_SPLIT
-        } else if (isMidSplit && isNodeSplit && !isNPlusZero && !isDigital) {
-            return MIDSPLIT_NODE_SPLIT
-        } else if (isMidSplit && !isNPlusZero && !isDigital && !isNodeSplit) {
-            return MIDSPLIT
-        } else {
-            return NEEDS_REVIEW
+        uniqueActions.each { builder.add(it) }
+
+        return builder.build()
+    }
+
+    private static final class DescriptionBuilder {
+        List<ACTION> descriptions = new LinkedList<>()
+        StringBuilder builder = new StringBuilder()
+
+        private static final String DEFAULT_DESCRIPTION = NEEDS_REVIEW.description
+        private static final String SPACE = " "
+
+        DescriptionBuilder add(ACTION action) {
+            descriptions.add(action)
+            this
+        }
+
+        String build() {
+            if ( !descriptions.contains(NEEDS_REVIEW) ) {
+                descriptions.sort{it.order}.each {
+                    action ->
+                        if (this.builder.size() > 0) {
+                            this.builder.append(SPACE).append(action.description)
+                        } else {
+                            this.builder.append(action.description)
+                        }
+                }
+            }
+            builder.length() > 0 ? builder.toString(): DEFAULT_DESCRIPTION
         }
     }
 }

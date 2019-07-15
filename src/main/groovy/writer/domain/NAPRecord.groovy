@@ -14,11 +14,21 @@ class NAPRecord implements NodeAction , NodeLocation {
     String siteId
     String facility
     int hhp
+    int mduHHP
+    int resHHP
     String actionDate
+    String actionDriver
     List<ACTION> nodeActions
     double aerialMiles
     double buriedMiles
     String inPOI
+    String nodeType
+    String cmts
+    String serviceGroup
+    String facilityTLA
+    String ospMarket
+    String scenario
+
 
     LocationUtil.LocationInfo getLocationInfo(){
         LocationUtil.getLocationInfo(this.marketDesc,this.facility)
