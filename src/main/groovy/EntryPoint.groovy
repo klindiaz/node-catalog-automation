@@ -24,9 +24,9 @@ class EntryPoint {
                     String marketDescVal = site_desc as String
                     String siteIdVal = ReaderUtil.getSiteId(site_id as String)
                     String facilityVal = facility as String
-                    int hhpVal = hhp as int
-                    int mduHHP = mdu_hhp as int
-                    int resHHP = res_hhp as int
+                    int hhpVal = (int) Double.parseDouble(hhp as String)
+                    int mduHHP = (int) Double.parseDouble(mdu_hhp as String)
+                    int resHHP = (int) Double.parseDouble(res_hhp as String)
                     String actionDateVal = format.format(new Date(node_action_date as String))
                     String actionDriver = node_action_driver as String
 
